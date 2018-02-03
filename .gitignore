@@ -1,0 +1,67 @@
+###########
+# OS FILE #
+##########
+.DS_STORE
+Thumbs.db
+
+###########
+#  Maven  #
+###########
+
+# General
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
+!/.mvn/wrapper/maven-wrapper.jar
+
+###########
+# Intellj #
+###########
+# General
+.idea/
+
+# CMake
+cmake-build-debug/
+cmake-build-release/
+
+# Mongo Explorer plugin:
+.idea/**/mongoSettings.xml
+
+## File-based project format:
+*.iws
+
+## Plugin-specific files:
+
+# IntelliJ
+out/
+
+###########
+# Eclipse #
+###########
+# General
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.classpath
+.project
+.recommenders
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally
