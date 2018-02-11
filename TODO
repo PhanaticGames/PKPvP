@@ -16,11 +16,8 @@
  - Auto-Respawn when killed
 
 Player join ->
-  -> TP to spawn
-  -> Set inv
-    -> Slot 1 is hit selector
-    -> Slot 9 to JS item
   -> Disallow exiting the spawn
+    -> HOW?!?!?!?!?!?
 
 Player kit select ->
   -> Clear inv
