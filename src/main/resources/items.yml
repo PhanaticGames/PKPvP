@@ -1,0 +1,18 @@
+# Items config
+# Note, you cannot declare any new items
+
+ks:
+  mat: 'ANVIL'
+  data: 0
+  name: '&6Kill Streaks'
+  lore:
+    - '&6Use me to get rewards for your kill streaks'
+  amount: 1
+
+kitselector:
+  mat: 'COMPASS'
+  data: 0
+  name: '&6Kit Selector'
+  lore:
+    - '&6Use me to select a kit'
+  amount: 1

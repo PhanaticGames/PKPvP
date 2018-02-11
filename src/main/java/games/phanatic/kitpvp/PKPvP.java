@@ -7,16 +7,19 @@ import games.phanatic.kitpvp.listeners.PlayerDeath;
 import games.phanatic.kitpvp.listeners.PlayerJoin;
 import games.phanatic.kitpvp.listeners.PlayerLeave;
 import games.phanatic.kitpvp.util.FileUtil;
+import games.phanatic.kitpvp.util.ItemManager;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class PKPvP extends JavaPlugin {
 
     private FileUtil fileUtil;
+    private ItemManager isManager;
 
     @Override
     public void onEnable() {
         fileUtil = new FileUtil(this);
+        isManager = new ItemManager(this);
         regListeners();
         regCommands();
     }
