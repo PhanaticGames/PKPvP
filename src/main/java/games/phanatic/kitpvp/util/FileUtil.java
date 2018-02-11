@@ -47,12 +47,11 @@ public class FileUtil {
     public void saveSpawnConfig() {
         try {
             spawnConfig.save(spawnFile);
-        }catch (IOException ex) {
+        } catch (IOException ex) {
             System.err.println("IOException caught when saving config file...");
             ex.printStackTrace();
         }
     }
-
 
     /**
      * Overriden from YamlConfiguration.loadConfiguration
