@@ -22,6 +22,8 @@ public class PlayerDeath implements Listener {
     public void execute(PlayerDeathEvent e) {
         Player killed = e.getEntity();
         Player killer = e.getEntity().getKiller();
+        e.getDrops().clear();
+        e.setDroppedExp(0);
         Bukkit.getScheduler().scheduleSyncDelayedTask(pvp, new Runnable() {
             @Override
             public void run() {

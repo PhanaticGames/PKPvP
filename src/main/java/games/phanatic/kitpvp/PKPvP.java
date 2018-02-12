@@ -2,11 +2,9 @@ package games.phanatic.kitpvp;
 
 import code.matthew.psc.utils.core.CommandManager;
 import games.phanatic.kitpvp.cmds.Setspawn;
-import games.phanatic.kitpvp.listeners.EntityDeath;
-import games.phanatic.kitpvp.listeners.PlayerDeath;
-import games.phanatic.kitpvp.listeners.PlayerJoin;
-import games.phanatic.kitpvp.listeners.PlayerLeave;
+import games.phanatic.kitpvp.listeners.*;
 import games.phanatic.kitpvp.util.FileUtil;
+import games.phanatic.kitpvp.util.InventoryManager;
 import games.phanatic.kitpvp.util.ItemManager;
 import games.phanatic.kitpvp.util.LocationManager;
 import lombok.Getter;
@@ -24,11 +22,15 @@ public class PKPvP extends JavaPlugin {
     @Getter
     private LocationManager locManager;
 
+    @Getter
+    private InventoryManager invManager;
+
     @Override
     public void onEnable() {
         fileUtil = new FileUtil(this);
         isManager = new ItemManager(this);
         locManager = new LocationManager(this);
+        invManager = new InventoryManager(this);
         regListeners();
         regCommands();
     }
@@ -44,6 +46,7 @@ public class PKPvP extends JavaPlugin {
         manager.registerEvents(new PlayerDeath(this), this);
         manager.registerEvents(new PlayerJoin(this), this);
         manager.registerEvents(new PlayerLeave(), this);
+        manager.registerEvents(new Interact(this), this);
     }
 
     private void regCommands() {

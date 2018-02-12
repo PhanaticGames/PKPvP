@@ -1,0 +1,12 @@
+
+
+inv:
+  name: "&6Kit selector"
+  size: 54
+  slots:
+    53:
+      mat: 'BOOK_AND_QUILL'
+      data: 0
+      name: '&6Help'
+      lore:
+        - '&bNeed help? Ask an online staff memeber!'

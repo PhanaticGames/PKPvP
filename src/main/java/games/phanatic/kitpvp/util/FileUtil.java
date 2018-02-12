@@ -2,6 +2,7 @@ package games.phanatic.kitpvp.util;
 
 import code.matthew.psc.api.file.ConfigFile;
 import games.phanatic.kitpvp.PKPvP;
+import lombok.Getter;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -13,8 +14,18 @@ import java.io.IOException;
 public class FileUtil {
 
     private File spawnFile;
+
+    @Getter
     private FileConfiguration spawnConfig;
+
+    @Getter
     private ConfigFile items;
+
+    @Getter
+    private ConfigFile killStreaks;
+
+    @Getter
+    private ConfigFile kitSelector;
 
     private PKPvP pvp;
 
@@ -24,6 +35,10 @@ public class FileUtil {
         checkFileIntegrity();
         items = new ConfigFile(pvp, "items.yml");
         items.setup();
+        kitSelector = new ConfigFile(pvp, "kitselector.yml");
+        kitSelector.setup();
+        killStreaks = new ConfigFile(pvp, "killstreaks.yml");
+        killStreaks.setup();
         reload();
     }
 
@@ -44,14 +59,8 @@ public class FileUtil {
     public void reload() {
         spawnConfig = loadConfiguration(spawnFile);
         items.reload();
-    }
-
-    public ConfigFile getItems() {
-        return items;
-    }
-
-    public FileConfiguration getSpawnConfig() {
-        return spawnConfig;
+        kitSelector.reload();
+        killStreaks.reload();
     }
 
     public void saveSpawnConfig() {

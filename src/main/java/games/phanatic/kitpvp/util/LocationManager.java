@@ -47,5 +47,6 @@ public class LocationManager {
         pvp.getFileUtil().getSpawnConfig().set("yaw", yaw);
         String pitch = String.valueOf((spawn.getPitch()));
         pvp.getFileUtil().getSpawnConfig().set("p", pitch);
+        pvp.getFileUtil().saveSpawnConfig();
     }
 }
