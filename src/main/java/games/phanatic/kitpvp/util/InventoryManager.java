@@ -47,6 +47,7 @@ public class InventoryManager {
             int data = pvp.getFileUtil().getKitSelector().getInt("inv.slots." + s + ".data");
             IKitSelectItem item = KitSelectorItemFactory.createKSItem(name, mat, data, lore, Integer.valueOf(s), "0");
             kitSelector.setItem(item.getSlot(), item.toIS());
+            kitItems.add(item);
         }
     }
 

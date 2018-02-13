@@ -24,13 +24,10 @@ public class PlayerDeath implements Listener {
         Player killer = e.getEntity().getKiller();
         e.getDrops().clear();
         e.setDroppedExp(0);
-        Bukkit.getScheduler().scheduleSyncDelayedTask(pvp, new Runnable() {
-            @Override
-            public void run() {
-                ((CraftPlayer) killed).getHandle().playerConnection.a(new PacketPlayInClientCommand(PacketPlayInClientCommand.EnumClientCommand.PERFORM_RESPAWN));
-                killed.teleport(pvp.getLocManager().getSpawn(), PlayerTeleportEvent.TeleportCause.PLUGIN);
-                pvp.getIsManager().setPlayersInv(killed);
-            }
+        Bukkit.getScheduler().scheduleSyncDelayedTask(pvp, () -> {
+            ((CraftPlayer) killed).getHandle().playerConnection.a(new PacketPlayInClientCommand(PacketPlayInClientCommand.EnumClientCommand.PERFORM_RESPAWN));
+            killed.teleport(pvp.getLocManager().getSpawn(), PlayerTeleportEvent.TeleportCause.PLUGIN);
+            pvp.getIsManager().setPlayersInv(killed);
         }, 12L);
     }
 }
