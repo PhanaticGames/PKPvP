@@ -19,7 +19,7 @@ inv:
       lore:
         - '&bThis will spawn a supply create containing random goods to help you in battle!'
     2:
-      mat: 'GOLDEN_SWORD'
+      mat: 'IRON_SWORD'
       data: 0
       requriedStreak: 10
       name: '&6Doppelganger!'

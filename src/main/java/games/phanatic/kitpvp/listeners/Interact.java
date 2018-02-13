@@ -15,10 +15,10 @@ public class Interact implements Listener {
 
     @EventHandler
     public void execute(PlayerInteractEvent e) {
-        if(e.getItem().getType() == pvp.getIsManager().getKitSelector().getType()) {
+        if (e.getItem().getType() == pvp.getIsManager().getKitSelector().getType()) {
             pvp.getInvManager().openKitSelector(e.getPlayer());
-        } else if(e.getItem().getType() == pvp.getIsManager().getKillStreaks().getType()) {
-            // Open kill streaks
+        } else if (e.getItem().getType() == pvp.getIsManager().getKillStreaks().getType()) {
+            pvp.getInvManager().openKillsStreaks(e.getPlayer());
         }
     }
 }
