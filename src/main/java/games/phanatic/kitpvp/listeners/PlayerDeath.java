@@ -28,6 +28,8 @@ public class PlayerDeath implements Listener {
             ((CraftPlayer) killed).getHandle().playerConnection.a(new PacketPlayInClientCommand(PacketPlayInClientCommand.EnumClientCommand.PERFORM_RESPAWN));
             killed.teleport(pvp.getLocManager().getSpawn(), PlayerTeleportEvent.TeleportCause.PLUGIN);
             pvp.getIsManager().setPlayersInv(killed);
+            killed.setFireTicks(0);
+            killed.getActivePotionEffects().clear();
         }, 12L);
     }
 }

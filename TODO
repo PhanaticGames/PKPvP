@@ -9,7 +9,7 @@
  - Never gone
  - KS options:
  - Config
- -  KS: Attack dogs(4 good borken doggos)(hekin rare)
+ - KS: Attack dogs(4 good borken doggos)(hekin rare)
  - 5 Killstreak: Supply Crate (Spawns a chest which they can loot and gives them a diamond chestplate, golden apples, or a diamond sword, Different every time they get a 5 killstreak)
  - 10 killstreak: Doppelganger (Zombie Pigman with iron armor, attacks the enemy and is friendly to the owner),
  - 20 Killstreak: Napalm / Nuke (Place the tnt down, spawns 10 tnt that drop from the sky and blows the enemy up, Not the map or does not injure the owner).
@@ -27,11 +27,6 @@ Player kit select ->
   -> Allow to exit spawn
 
 Player kill player ->
-  -> Player killed
-    -> Spawn
-    -> Auto respawn
-    -> Clear effects
-    -> Set inv
   -> Killer
     -> Add KS
     -> Reward

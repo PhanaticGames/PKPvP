@@ -47,6 +47,7 @@ public class PKPvP extends JavaPlugin {
         manager.registerEvents(new PlayerJoin(this), this);
         manager.registerEvents(new PlayerLeave(), this);
         manager.registerEvents(new Interact(this), this);
+        manager.registerEvents(new PlayerHunger(), this);
     }
 
     private void regCommands() {
