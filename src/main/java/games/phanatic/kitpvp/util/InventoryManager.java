@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -38,17 +37,15 @@ public class InventoryManager {
         kitSelector = Bukkit.createInventory(null,
                 pvp.getFileUtil().getKitSelector().getInt("inv.size"),
                 ColorUtil.colorStr(pvp.getFileUtil().getKitSelector().getString("inv.name")));
-        // TODO: 2/12/2018 FIX THIS NASTY CODE 
+        // TODO: 2/12/2018 FIX THIS NASTY CODE
         Set<String> kitKeys = kitSection.getKeys(false);
-        Iterator<String> kitIt = kitKeys.iterator();
 
-        while (kitIt.hasNext()) {
-            String key = kitIt.next();
-            String name = ColorUtil.colorStr(pvp.getFileUtil().getKitSelector().getString("inv.slots." + key + ".name"));
-            Material mat = Material.valueOf(pvp.getFileUtil().getKitSelector().getString("inv.slots." + key + ".mat"));
-            List<String> lore = pvp.getFileUtil().getKitSelector().getStringList("inv.slots." + key + ".lore");
-            int data = pvp.getFileUtil().getKitSelector().getInt("inv.slots." + key + ".data");
-            IKitSelectItem item = KitSelectorItemFactory.createKSItem(name, mat, data, lore, Integer.valueOf(key), "0");
+        for(String s : kitKeys) {
+            String name = ColorUtil.colorStr(pvp.getFileUtil().getKitSelector().getString("inv.slots." + s + ".name"));
+            Material mat = Material.valueOf(pvp.getFileUtil().getKitSelector().getString("inv.slots." + s + ".mat"));
+            List<String> lore = pvp.getFileUtil().getKitSelector().getStringList("inv.slots." + s + ".lore");
+            int data = pvp.getFileUtil().getKitSelector().getInt("inv.slots." + s + ".data");
+            IKitSelectItem item = KitSelectorItemFactory.createKSItem(name, mat, data, lore, Integer.valueOf(s), "0");
             kitSelector.setItem(item.getSlot(), item.toIS());
         }
     }
