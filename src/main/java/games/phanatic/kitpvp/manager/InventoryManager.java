@@ -1,7 +1,8 @@
-package games.phanatic.kitpvp.util;
+package games.phanatic.kitpvp.manager;
 
 import code.matthew.psc.utils.strings.ColorUtil;
 import games.phanatic.kitpvp.PKPvP;
+import games.phanatic.kitpvp.api.IKit;
 import games.phanatic.kitpvp.factory.KillStreakItemFactory;
 import games.phanatic.kitpvp.factory.KitSelectorItemFactory;
 import games.phanatic.kitpvp.itemtype.IKillStreakItem;
@@ -13,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -24,12 +26,14 @@ public class InventoryManager {
     private List<IKillStreakItem> ksItems;
     private List<IKitSelectItem> kitItems;
 
+    private HashMap<Player, Inventory> playerInv;
     private PKPvP pvp;
 
     public InventoryManager(PKPvP pvp) {
         this.pvp = pvp;
         ksItems = new ArrayList<>();
         kitItems = new ArrayList<>();
+        playerInv = new HashMap<>();
         loadInvs();
     }
 
@@ -71,7 +75,19 @@ public class InventoryManager {
     }
 
     public void openKitSelector(Player p) {
-        p.openInventory(kitSelector);
+        if(kitSelector == null) {
+            loadInvs();
+        }
+        if(playerInv.containsKey(p)) {
+            p.openInventory(playerInv.get(p));
+        } else {
+            Inventory inv = kitSelector;
+            for (IKit kit : pvp.getKitManager().getPlayerKits(p)) {
+                inv.addItem(kit.icon().toIS());
+            }
+            p.openInventory(inv);
+            playerInv.put(p, inv);
+        }
     }
 
     public void openKillsStreaks(Player p) {

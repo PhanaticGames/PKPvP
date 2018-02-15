@@ -1,0 +1,18 @@
+kits:
+  "Standard":
+    icon:
+      mat: 'DIAMOND_SWORD'
+      data: 0
+      name: 'Standard'
+      lore:
+        - "&bEvery great person has started somewhere."
+    items:
+      "0":
+        mat: 'DIAMOND_SWORD'
+        data: 0
+        name: 'Diamond Sword'
+        lore: []
+        slot: 1
+    permission: 0
+    price: 0
+    default: true

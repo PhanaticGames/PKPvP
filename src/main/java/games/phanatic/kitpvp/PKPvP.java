@@ -1,12 +1,14 @@
 package games.phanatic.kitpvp;
 
 import code.matthew.psc.utils.core.CommandManager;
+import games.phanatic.kitpvp.cmds.Dev;
 import games.phanatic.kitpvp.cmds.Setspawn;
 import games.phanatic.kitpvp.listeners.*;
+import games.phanatic.kitpvp.manager.KitManager;
 import games.phanatic.kitpvp.util.FileUtil;
-import games.phanatic.kitpvp.util.InventoryManager;
-import games.phanatic.kitpvp.util.ItemManager;
-import games.phanatic.kitpvp.util.LocationManager;
+import games.phanatic.kitpvp.manager.InventoryManager;
+import games.phanatic.kitpvp.manager.ItemManager;
+import games.phanatic.kitpvp.manager.LocationManager;
 import lombok.Getter;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,12 +27,16 @@ public class PKPvP extends JavaPlugin {
     @Getter
     private InventoryManager invManager;
 
+    @Getter
+    private KitManager kitManager;
+
     @Override
     public void onEnable() {
         fileUtil = new FileUtil(this);
         isManager = new ItemManager(this);
         locManager = new LocationManager(this);
         invManager = new InventoryManager(this);
+        kitManager = new KitManager(this);
         regListeners();
         regCommands();
     }
@@ -52,5 +58,6 @@ public class PKPvP extends JavaPlugin {
 
     private void regCommands() {
         CommandManager.regCommand(new Setspawn(this));
+        CommandManager.regCommand(new Dev());
     }
 }

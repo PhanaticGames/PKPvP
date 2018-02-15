@@ -27,6 +27,9 @@ public class FileUtil {
     @Getter
     private ConfigFile kitSelector;
 
+    @Getter
+    private ConfigFile kitConfig;
+
     private PKPvP pvp;
 
     public FileUtil(PKPvP pvp) {
@@ -39,6 +42,8 @@ public class FileUtil {
         kitSelector.setup();
         killStreaks = new ConfigFile(pvp, "killstreaks.yml");
         killStreaks.setup();
+        kitConfig = new ConfigFile(pvp, "kits.yml");
+        kitConfig.setup();
         reload();
     }
 
@@ -61,6 +66,7 @@ public class FileUtil {
         items.reload();
         kitSelector.reload();
         killStreaks.reload();
+        kitConfig.reload();
     }
 
     public void saveSpawnConfig() {

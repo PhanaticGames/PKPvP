@@ -1,4 +1,4 @@
-package games.phanatic.kitpvp.util;
+package games.phanatic.kitpvp.manager;
 
 import code.matthew.psc.utils.item.ItemBuilder;
 import code.matthew.psc.utils.strings.ColorUtil;

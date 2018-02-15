@@ -1,4 +1,4 @@
-package games.phanatic.kitpvp.util;
+package games.phanatic.kitpvp.manager;
 
 import games.phanatic.kitpvp.PKPvP;
 import org.bukkit.Bukkit;
