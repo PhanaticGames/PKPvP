@@ -30,6 +30,8 @@ public class PlayerDeath implements Listener {
             pvp.getIsManager().setPlayersInv(killed);
             killed.setFireTicks(0);
             killed.getActivePotionEffects().clear();
+            pvp.getTmpDatManager().removeKS(killed);
+            pvp.getTmpDatManager().addKS(killer);
         }, 12L);
     }
 }
