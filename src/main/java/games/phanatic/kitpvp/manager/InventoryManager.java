@@ -93,4 +93,12 @@ public class InventoryManager {
     public void openKillsStreaks(Player p) {
         p.openInventory(killStreaks);
     }
+
+    public Inventory getKillStreaks() {
+        return killStreaks;
+    }
+
+    public Inventory getKitSelector() {
+        return kitSelector;
+    }
 }

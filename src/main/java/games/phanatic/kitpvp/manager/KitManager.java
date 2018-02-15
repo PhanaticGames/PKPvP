@@ -47,11 +47,6 @@ public class KitManager {
         List<IKit> pKits = new ArrayList<>();
 
         for (IKit kit : kits) {
-            System.out.println(kit.permission());
-            System.out.println(kit.icon().getName());
-            System.out.println(kit.isDefault());
-            System.out.println(kit.name());
-            System.out.println(kit.price());
             if (kit.isDefault()) {
                 pKits.add(kit);
             } else if (kit.permission() != null && p.hasPermission(kit.permission())) {
@@ -60,6 +55,20 @@ public class KitManager {
         }
 
         return pKits;
+    }
+
+    public List<IKit> getKits() {
+        return kits;
+    }
+
+    public void giveKit(Player p, IKit kit) {
+        p.getInventory().clear();
+        p.getInventory().setArmorContents(null);
+        p.getActivePotionEffects().clear();
+        p.setFireTicks(0);
+        for(IItem item : kit.items()) {
+            p.getInventory().setItem(item.getSlot(), item.toIS());
+        }
     }
 
     private IItem loadItem(FileConfiguration config, String path) {

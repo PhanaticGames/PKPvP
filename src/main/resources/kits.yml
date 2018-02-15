@@ -12,7 +12,7 @@ kits:
         data: 0
         name: 'Diamond Sword'
         lore: []
-        slot: 1
+        slot: 0
     permission: 0
     price: 0
     default: true
