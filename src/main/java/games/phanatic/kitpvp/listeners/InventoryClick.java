@@ -1,5 +1,6 @@
 package games.phanatic.kitpvp.listeners;
 
+import code.matthew.psc.utils.strings.ColorUtil;
 import games.phanatic.kitpvp.PKPvP;
 import games.phanatic.kitpvp.api.IKit;
 import games.phanatic.kitpvp.itemtype.IKillStreakItem;
@@ -32,6 +33,8 @@ public class InventoryClick implements Listener {
                 String iconCompareName = ChatColor.stripColor(icon.getItemMeta().getDisplayName());
                 if(icon.getType() == clickedMat && iconCompareName.equalsIgnoreCase(clickedName)) {
                     pvp.getKitManager().giveKit(p, kit);
+                    p.closeInventory();
+                    p.sendMessage(ColorUtil.colorStr(pvp.getFileUtil().getMessages().getString("givenKit")));
                 }
             }
         } else if (invName.equalsIgnoreCase(ChatColor.stripColor(pvp.getInvManager().getKillStreaks().getName()))) {
@@ -40,9 +43,13 @@ public class InventoryClick implements Listener {
                 Material mat = item.getType();
                 String name = ChatColor.stripColor(item.getName());
                 if(clickedMat == mat && clickedName.equalsIgnoreCase(name)) {
+                    p.closeInventory();
                     if(pvp.getTmpDatManager().canAfford(p, item.getMinKS())) {
                         pvp.getTmpDatManager().subtractKS(p, item.getMinKS());
                         item.getAblity().execute(p);
+                        p.sendMessage(ColorUtil.colorStr(pvp.getFileUtil().getMessages().getString("givenKsReward")));
+                    } else {
+                        p.sendMessage(ColorUtil.colorStr(pvp.getFileUtil().getMessages().getString("notEnoughKS")));
                     }
                 }
             }

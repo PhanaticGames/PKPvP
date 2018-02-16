@@ -69,6 +69,7 @@ public class KitManager {
         for(IItem item : kit.items()) {
             p.getInventory().setItem(item.getSlot(), item.toIS());
         }
+        p.getInventory().setItem(8, pvp.getIsManager().getKillStreaks());
     }
 
     private IItem loadItem(FileConfiguration config, String path) {
