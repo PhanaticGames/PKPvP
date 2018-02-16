@@ -9,6 +9,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class PlayerDeath implements Listener {
 
@@ -32,6 +34,10 @@ public class PlayerDeath implements Listener {
             killed.getActivePotionEffects().clear();
             pvp.getTmpDatManager().removeKS(killed);
             pvp.getTmpDatManager().addKS(killer);
+            String potEffectName = pvp.getFileUtil().getConfig().getString("killEffect");
+            int timer = pvp.getFileUtil().getConfig().getInt("killEffectTime");
+            int amp = pvp.getFileUtil().getConfig().getInt("killEffectAmp");
+            killer.addPotionEffect(new PotionEffect(PotionEffectType.getByName(potEffectName), timer, amp));
         }, 12L);
     }
 }
