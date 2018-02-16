@@ -1,5 +1,6 @@
 package games.phanatic.kitpvp.itemtype;
 
+import games.phanatic.kitpvp.api.IHardCodedAblity;
 import games.phanatic.kitpvp.api.IItem;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,8 +14,13 @@ public class IKillStreakItem extends IItem {
     @Setter
     private int minKS;
 
-    public IKillStreakItem(Material mat, String name, int data, List<String> lore, int slot, int minKS) {
+    @Getter
+    @Setter
+    private IHardCodedAblity ablity;
+
+    public IKillStreakItem(Material mat, String name, int data, List<String> lore, int slot, int minKS, IHardCodedAblity ablity ) {
         super(name, mat, data, lore, slot);
         setMinKS(minKS);
+        setAblity(ablity);
     }
 }

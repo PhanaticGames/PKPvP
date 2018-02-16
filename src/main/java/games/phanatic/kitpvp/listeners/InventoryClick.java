@@ -2,6 +2,7 @@ package games.phanatic.kitpvp.listeners;
 
 import games.phanatic.kitpvp.PKPvP;
 import games.phanatic.kitpvp.api.IKit;
+import games.phanatic.kitpvp.itemtype.IKillStreakItem;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -35,6 +36,16 @@ public class InventoryClick implements Listener {
             }
         } else if (invName.equalsIgnoreCase(ChatColor.stripColor(pvp.getInvManager().getKillStreaks().getName()))) {
             e.setCancelled(true);
+            for(IKillStreakItem item : pvp.getInvManager().getKillStreakItems()) {
+                Material mat = item.getType();
+                String name = ChatColor.stripColor(item.getName());
+                if(clickedMat == mat && clickedName.equalsIgnoreCase(name)) {
+                    if(pvp.getTmpDatManager().canAfford(p, item.getMinKS())) {
+                        pvp.getTmpDatManager().subtractKS(p, item.getMinKS());
+                        item.getAblity().execute(p);
+                    }
+                }
+            }
         }
     }
 }

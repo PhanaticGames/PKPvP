@@ -3,6 +3,7 @@ package games.phanatic.kitpvp;
 import code.matthew.psc.utils.core.CommandManager;
 import games.phanatic.kitpvp.cmds.Dev;
 import games.phanatic.kitpvp.cmds.Setspawn;
+import games.phanatic.kitpvp.hardcoded.TNT;
 import games.phanatic.kitpvp.listeners.*;
 import games.phanatic.kitpvp.manager.*;
 import games.phanatic.kitpvp.util.FileUtil;
@@ -30,9 +31,14 @@ public class PKPvP extends JavaPlugin {
     @Getter
     private TempDataManager tmpDatManager;
 
+    @Getter
+    private HardCodedAblitys ablitys;
+
     @Override
     public void onEnable() {
         fileUtil = new FileUtil(this);
+        ablitys = new HardCodedAblitys(this);
+        ablitys.registerHardCodedAbility(new TNT());
         isManager = new ItemManager(this);
         locManager = new LocationManager(this);
         invManager = new InventoryManager(this);
@@ -60,6 +66,6 @@ public class PKPvP extends JavaPlugin {
 
     private void regCommands() {
         CommandManager.regCommand(new Setspawn(this));
-        CommandManager.regCommand(new Dev());
+        CommandManager.regCommand(new Dev(this));
     }
 }

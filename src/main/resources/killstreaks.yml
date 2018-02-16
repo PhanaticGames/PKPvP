@@ -9,6 +9,7 @@ inv:
       data: 14
       requriedStreak: 1
       name: '&6Attack dogs!'
+      interalID: 'acc_dog'
       lore:
         - '&bThis will spawn a group of four attack dogs to assist you in battle!'
     1:
@@ -16,6 +17,7 @@ inv:
       data: 0
       requriedStreak: 5
       name: '&6Supply drop!'
+      interalID: 'spp_drp'
       lore:
         - '&bThis will spawn a supply create containing random goods to help you in battle!'
     2:
@@ -23,6 +25,7 @@ inv:
       data: 0
       requriedStreak: 10
       name: '&6Doppelganger!'
+      interalID: 'dop_gan'
       lore:
         - '&bThis will spawn your doppelganger. He is just not quite as good a fighter as you...'
     3:
@@ -30,6 +33,7 @@ inv:
       data: 0
       requriedStreak: 20
       name: '&6Napalm!'
+      interalID: 'tnt_drp'
       lore:
         - '&bThis will give you a piece of tnt!'
         - '&bUpon placement this tnt will spawn 10 more and hurt only your enemys'

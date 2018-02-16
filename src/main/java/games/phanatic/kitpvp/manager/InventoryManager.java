@@ -2,6 +2,7 @@ package games.phanatic.kitpvp.manager;
 
 import code.matthew.psc.utils.strings.ColorUtil;
 import games.phanatic.kitpvp.PKPvP;
+import games.phanatic.kitpvp.api.IHardCodedAblity;
 import games.phanatic.kitpvp.api.IKit;
 import games.phanatic.kitpvp.factory.KillStreakItemFactory;
 import games.phanatic.kitpvp.factory.KitSelectorItemFactory;
@@ -68,17 +69,18 @@ public class InventoryManager {
             List<String> lore = pvp.getFileUtil().getKillStreaks().getStringList("inv.slots." + s + ".lore");
             int data = pvp.getFileUtil().getKillStreaks().getInt("inv.slots." + s + ".data");
             int minKs = pvp.getFileUtil().getKillStreaks().getInt("inv.slots." + s + ".requriedStreak");
-            IKillStreakItem item = KillStreakItemFactory.createKSItem(name, mat, data, lore, Integer.valueOf(s), minKs);
+            IHardCodedAblity ability = pvp.getAblitys().getAbility(pvp.getFileUtil().getKillStreaks().getString("inv.slots." + s + ".interalID"));
+            IKillStreakItem item = KillStreakItemFactory.createKSItem(name, mat, data, lore, Integer.valueOf(s), minKs, ability);
             killStreaks.setItem(item.getSlot(), item.toIS());
             ksItems.add(item);
         }
     }
 
     public void openKitSelector(Player p) {
-        if(kitSelector == null) {
+        if (kitSelector == null) {
             loadInvs();
         }
-        if(playerInv.containsKey(p)) {
+        if (playerInv.containsKey(p)) {
             p.openInventory(playerInv.get(p));
         } else {
             Inventory inv = kitSelector;
@@ -96,6 +98,10 @@ public class InventoryManager {
 
     public Inventory getKillStreaks() {
         return killStreaks;
+    }
+
+    public List<IKillStreakItem> getKillStreakItems() {
+        return ksItems;
     }
 
     public Inventory getKitSelector() {
