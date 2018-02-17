@@ -10,7 +10,7 @@ public class Shop extends ICommand {
     private PKPvP pvp;
 
     public Shop(PKPvP pvp) {
-        super("shop", "psc.shop", "Open the shop", true);
+        super("shop", "pkpvp.shop", "Open the shop", true);
         this.pvp = pvp;
     }
 
