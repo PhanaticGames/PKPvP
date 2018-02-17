@@ -23,11 +23,10 @@ public class InventoryManager {
 
     private Inventory kitSelector;
     private Inventory killStreaks;
-
     private List<IKillStreakItem> ksItems;
     private List<IKitSelectItem> kitItems;
 
-    private HashMap<Player, Inventory> playerInv;
+    private HashMap<String, Inventory> playerInv;
     private PKPvP pvp;
 
     public InventoryManager(PKPvP pvp) {
@@ -77,22 +76,51 @@ public class InventoryManager {
     }
 
     public void openShop(Player p) {
+        List<IKit> dontGot = new ArrayList<>();
+        for (IKit kit : pvp.getKitManager().getKits()) {
+            if (!p.hasPermission(kit.permission())) {
+                dontGot.add(kit);
+            }
+        }
 
+        Inventory shop = Bukkit.createInventory(null, determineShopSize(dontGot.size()), ColorUtil.colorStr(pvp.getFileUtil().getConfig().getString("shopName")));
+        for (IKit kit : dontGot) {
+            shop.addItem(kit.icon().toIS());
+        }
+        p.openInventory(shop);
+    }
+
+    private int determineShopSize(int number) {
+        if (number <= 9) {
+            return 9;
+        } else if (number <= 18) {
+            return 18;
+        } else if (number <= 27) {
+            return 27;
+        } else if (number <= 36) {
+            return 36;
+        } else if (number <= 45) {
+            return 45;
+        } else if (number <= 54) {
+            return 54;
+        } else {
+            return 9;
+        }
     }
 
     public void openKitSelector(Player p) {
         if (kitSelector == null) {
             loadInvs();
         }
-        if (playerInv.containsKey(p)) {
-            p.openInventory(playerInv.get(p));
+        if (playerInv.containsKey(p.getDisplayName())) {
+            p.openInventory(playerInv.get(p.getDisplayName()));
         } else {
             Inventory inv = kitSelector;
             for (IKit kit : pvp.getKitManager().getPlayerKits(p)) {
                 inv.addItem(kit.icon().toIS());
             }
             p.openInventory(inv);
-            playerInv.put(p, inv);
+            playerInv.put(p.getName(), inv);
         }
     }
 

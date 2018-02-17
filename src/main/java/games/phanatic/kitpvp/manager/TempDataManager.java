@@ -48,6 +48,10 @@ public class TempDataManager {
         pvp.getFileUtil().saveCoins();
     }
 
+    public void setupKS(Player p) {
+        killStreaks.put(p, 0);
+    }
+
     public void addKS(Player p) {
         if (killStreaks.containsKey(p)) {
             killStreaks.replace(p, killStreaks.get(p) + 1);

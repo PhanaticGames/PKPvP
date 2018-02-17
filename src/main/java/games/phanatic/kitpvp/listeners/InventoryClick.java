@@ -24,32 +24,36 @@ public class InventoryClick implements Listener {
     public void onInvClick(InventoryClickEvent e) {
         String invName = ChatColor.stripColor(e.getInventory().getName());
         Player p = (Player) e.getWhoClicked();
-        Material clickedMat = e.getCurrentItem().getType();
-        String clickedName = ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName());
-        if (invName.equalsIgnoreCase(ChatColor.stripColor(pvp.getInvManager().getKitSelector().getName()))) {
-            e.setCancelled(true);
-            for (IKit kit : pvp.getKitManager().getKits()) {
-                ItemStack icon = kit.icon().toIS();
-                String iconCompareName = ChatColor.stripColor(icon.getItemMeta().getDisplayName());
-                if(icon.getType() == clickedMat && iconCompareName.equalsIgnoreCase(clickedName)) {
-                    pvp.getKitManager().giveKit(p, kit);
-                    p.closeInventory();
-                    p.sendMessage(ColorUtil.colorStr(pvp.getFileUtil().getMessages().getString("givenKit")));
+
+        if (e.getCurrentItem() != null && e.getCurrentItem().getType() != null) {
+
+            Material clickedMat = e.getCurrentItem().getType();
+            String clickedName = ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName());
+            if (invName.equalsIgnoreCase(ChatColor.stripColor(pvp.getInvManager().getKitSelector().getName()))) {
+                e.setCancelled(true);
+                for (IKit kit : pvp.getKitManager().getKits()) {
+                    ItemStack icon = kit.icon().toIS();
+                    String iconCompareName = ChatColor.stripColor(icon.getItemMeta().getDisplayName());
+                    if (icon.getType() == clickedMat && iconCompareName.equalsIgnoreCase(clickedName)) {
+                        pvp.getKitManager().giveKit(p, kit);
+                        p.closeInventory();
+                        p.sendMessage(ColorUtil.colorStr(pvp.getFileUtil().getMessages().getString("givenKit")));
+                    }
                 }
-            }
-        } else if (invName.equalsIgnoreCase(ChatColor.stripColor(pvp.getInvManager().getKillStreaks().getName()))) {
-            e.setCancelled(true);
-            for(IKillStreakItem item : pvp.getInvManager().getKillStreakItems()) {
-                Material mat = item.getType();
-                String name = ChatColor.stripColor(item.getName());
-                if(clickedMat == mat && clickedName.equalsIgnoreCase(name)) {
-                    p.closeInventory();
-                    if(pvp.getTmpDatManager().canAfford(p, item.getMinKS())) {
-                        pvp.getTmpDatManager().subtractKS(p, item.getMinKS());
-                        item.getAblity().execute(p);
-                        p.sendMessage(ColorUtil.colorStr(pvp.getFileUtil().getMessages().getString("givenKsReward")));
-                    } else {
-                        p.sendMessage(ColorUtil.colorStr(pvp.getFileUtil().getMessages().getString("notEnoughKS")));
+            } else if (invName.equalsIgnoreCase(ChatColor.stripColor(pvp.getInvManager().getKillStreaks().getName()))) {
+                e.setCancelled(true);
+                for (IKillStreakItem item : pvp.getInvManager().getKillStreakItems()) {
+                    Material mat = item.getType();
+                    String name = ChatColor.stripColor(item.getName());
+                    if (clickedMat == mat && clickedName.equalsIgnoreCase(name)) {
+                        p.closeInventory();
+                        if (pvp.getTmpDatManager().canAfford(p, item.getMinKS())) {
+                            pvp.getTmpDatManager().subtractKS(p, item.getMinKS());
+                            item.getAblity().execute(p);
+                            p.sendMessage(ColorUtil.colorStr(pvp.getFileUtil().getMessages().getString("givenKsReward")));
+                        } else {
+                            p.sendMessage(ColorUtil.colorStr(pvp.getFileUtil().getMessages().getString("notEnoughKS")));
+                        }
                     }
                 }
             }

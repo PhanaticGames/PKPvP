@@ -83,7 +83,7 @@ public class FileUtil {
             // Set override to true bc if it exist and we somehow get here, there is an issue...
             pvp.saveResource("spawn.yml", true);
         }
-        if(coinFile.exists()) {
+        if(!coinFile.exists()) {
             try {
                 coinFile.createNewFile();
             }catch (IOException ex) {

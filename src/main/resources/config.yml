@@ -3,3 +3,5 @@ killEffect: 'REGENERATION'
 killEffectTime: 4
 killEffectAmp: 1
 datSync: 900
+# The shop size is dynamic..
+shopName: '&6Kit shop!'
