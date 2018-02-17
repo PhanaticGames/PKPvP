@@ -9,10 +9,12 @@ import games.phanatic.kitpvp.hardcoded.SupplyDrop;
 import games.phanatic.kitpvp.hardcoded.TNT;
 import games.phanatic.kitpvp.listeners.*;
 import games.phanatic.kitpvp.manager.*;
+import games.phanatic.kitpvp.run.CoinSave;
 import games.phanatic.kitpvp.util.FileUtil;
 import lombok.Getter;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitScheduler;
 
 public class PKPvP extends JavaPlugin {
 
@@ -49,14 +51,15 @@ public class PKPvP extends JavaPlugin {
         locManager = new LocationManager(this);
         invManager = new InventoryManager(this);
         kitManager = new KitManager(this);
-        tmpDatManager = new TempDataManager();
+        tmpDatManager = new TempDataManager(this);
         regListeners();
         regCommands();
+        loadRunnables();
     }
 
     @Override
     public void onDisable() {
-
+        tmpDatManager.saveCoins();
     }
 
     private void regListeners() {
@@ -74,5 +77,12 @@ public class PKPvP extends JavaPlugin {
     private void regCommands() {
         CommandManager.regCommand(new Setspawn(this));
         CommandManager.regCommand(new Dev(this));
+    }
+
+    private void loadRunnables() {
+        BukkitScheduler scheduler = getServer().getScheduler();
+        long coinSave = getFileUtil().getConfig().getInt("datSync");
+        coinSave = coinSave * 20;
+        scheduler.scheduleAsyncRepeatingTask(this, new CoinSave(this), coinSave, coinSave);
     }
 }

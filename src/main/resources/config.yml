@@ -2,3 +2,4 @@ coinReward: 1
 killEffect: 'REGENERATION'
 killEffectTime: 4
 killEffectAmp: 1
+datSync: 900

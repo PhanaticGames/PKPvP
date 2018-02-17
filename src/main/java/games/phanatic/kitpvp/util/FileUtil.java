@@ -18,6 +18,11 @@ public class FileUtil {
     @Getter
     private FileConfiguration spawnConfig;
 
+    private File coinFile;
+
+    @Getter
+    private FileConfiguration coinConfig;
+
     @Getter
     private ConfigFile items;
 
@@ -40,24 +45,33 @@ public class FileUtil {
 
     public FileUtil(PKPvP pvp) {
         this.pvp = pvp;
+
         spawnFile = new File(pvp.getDataFolder() + File.separator + "spawn.yml");
+        coinFile = new File(pvp.getDataFolder() + File.separator  + "coins.dat");
         checkFileIntegrity();
+
         items = new ConfigFile(pvp, "items.yml");
         items.setup();
+
         kitSelector = new ConfigFile(pvp, "kitselector.yml");
         kitSelector.setup();
+
         killStreaks = new ConfigFile(pvp, "killstreaks.yml");
         killStreaks.setup();
+
         kitConfig = new ConfigFile(pvp, "kits.yml");
         kitConfig.setup();
+
         messages = new ConfigFile(pvp, "messages.yml");
         messages.setup();
+
         config = new ConfigFile(pvp, "config.yml");
         config.setup();
+
         reload();
     }
 
-    public void checkFileIntegrity() {
+    private void checkFileIntegrity() {
         if(!pvp.getDataFolder().exists()) {
             if(pvp.getDataFolder().mkdirs()) {
                 System.out.println("Created data directory...");
@@ -69,10 +83,18 @@ public class FileUtil {
             // Set override to true bc if it exist and we somehow get here, there is an issue...
             pvp.saveResource("spawn.yml", true);
         }
+        if(coinFile.exists()) {
+            try {
+                coinFile.createNewFile();
+            }catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
-    public void reload() {
+    private void reload() {
         spawnConfig = loadConfiguration(spawnFile);
+        coinConfig = loadConfiguration(coinFile);
         items.reload();
         kitSelector.reload();
         killStreaks.reload();
@@ -85,7 +107,16 @@ public class FileUtil {
         try {
             spawnConfig.save(spawnFile);
         } catch (IOException ex) {
-            System.err.println("IOException caught when saving config file...");
+            System.err.println("IOException caught when saving spawn file...");
+            ex.printStackTrace();
+        }
+    }
+
+    public void saveCoins() {
+        try {
+            coinConfig.save(coinFile);
+        } catch (IOException ex) {
+            System.err.println("IOException caught when saving coins file...");
             ex.printStackTrace();
         }
     }

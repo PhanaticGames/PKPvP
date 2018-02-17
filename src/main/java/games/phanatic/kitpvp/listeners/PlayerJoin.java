@@ -19,5 +19,6 @@ public class PlayerJoin implements Listener {
         Player p = e.getPlayer();
         p.teleport(pvp.getLocManager().getSpawn());
         pvp.getIsManager().setPlayersInv(p);
+        pvp.getTmpDatManager().loadPlayerCoins(p);
     }
 }
