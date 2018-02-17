@@ -3,6 +3,7 @@ package games.phanatic.kitpvp;
 import code.matthew.psc.utils.core.CommandManager;
 import games.phanatic.kitpvp.cmds.Dev;
 import games.phanatic.kitpvp.cmds.Setspawn;
+import games.phanatic.kitpvp.cmds.Shop;
 import games.phanatic.kitpvp.hardcoded.AttackDog;
 import games.phanatic.kitpvp.hardcoded.DoppelGanger;
 import games.phanatic.kitpvp.hardcoded.SupplyDrop;
@@ -77,6 +78,7 @@ public class PKPvP extends JavaPlugin {
     private void regCommands() {
         CommandManager.regCommand(new Setspawn(this));
         CommandManager.regCommand(new Dev(this));
+        CommandManager.regCommand(new Shop(this));
     }
 
     private void loadRunnables() {

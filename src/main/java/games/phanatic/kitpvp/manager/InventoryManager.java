@@ -76,6 +76,10 @@ public class InventoryManager {
         }
     }
 
+    public void openShop(Player p) {
+
+    }
+
     public void openKitSelector(Player p) {
         if (kitSelector == null) {
             loadInvs();
