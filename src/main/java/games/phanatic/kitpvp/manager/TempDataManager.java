@@ -42,7 +42,7 @@ public class TempDataManager {
     }
 
     public void saveCoins() {
-        for(Player p : coins.keySet()) {
+        for (Player p : coins.keySet()) {
             pvp.getFileUtil().getCoinConfig().set(p.getUniqueId().toString(), coins.get(p));
         }
         pvp.getFileUtil().saveCoins();
@@ -66,7 +66,11 @@ public class TempDataManager {
         }
     }
 
-    public boolean canAfford(Player p, int price) {
+    public boolean canAffordKS(Player p, int price) {
+        return killStreaks.get(p) >= price;
+    }
+
+    public boolean canAffordCoins(Player p, int price) {
         return killStreaks.get(p) >= price;
     }
 

@@ -1,3 +1,5 @@
 notEnoughKS: '&cYou do not have a high enough kill streak for this! :('
 givenKsReward: '&2Reward redeemed.'
 givenKit: '&2Kit received.'
+notEnouchCoins: '&cYou cannot afford this.'
+kitBought: '&6Bought kit!'
