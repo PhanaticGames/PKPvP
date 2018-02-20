@@ -19,10 +19,8 @@ public class Dev extends ICommand {
         Player p = (Player) sender;
 
         if (p.isOp()) {
-            for (int i = 0; i < 20; i++) {
-                pvp.getTmpDatManager().addKS(p);
-            }
-            sender.sendMessage("Added 20 to ks");
+            pvp.getTmpDatManager().addCoins(p, 1000);
+            sender.sendMessage("Added 1000 to coins");
         }
         return true;
     }

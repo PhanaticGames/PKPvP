@@ -34,6 +34,7 @@ public class PlayerDeath implements Listener {
             killed.getActivePotionEffects().clear();
             pvp.getTmpDatManager().removeKS(killed);
             pvp.getTmpDatManager().addKS(killer);
+            pvp.getTmpDatManager().addCoins(killer, pvp.getConfig().getInt("coinsPerKill"));
             String potEffectName = pvp.getFileUtil().getConfig().getString("killEffect");
             int timer = pvp.getFileUtil().getConfig().getInt("killEffectTime");
             int amp = pvp.getFileUtil().getConfig().getInt("killEffectAmp");

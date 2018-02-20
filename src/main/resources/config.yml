@@ -5,3 +5,5 @@ killEffectAmp: 1
 datSync: 900
 # The shop size is dynamic..
 shopName: '&6Kit shop!'
+priceFomat: '&6Price: %PRICE%'
+coinsPerKill: 2

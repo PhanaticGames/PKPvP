@@ -71,7 +71,7 @@ public class TempDataManager {
     }
 
     public boolean canAffordCoins(Player p, int price) {
-        return killStreaks.get(p) >= price;
+        return coins.get(p) >= price;
     }
 
     public void subtractKS(Player p, int amount) {
