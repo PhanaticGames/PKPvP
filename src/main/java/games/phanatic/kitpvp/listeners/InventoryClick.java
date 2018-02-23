@@ -32,7 +32,7 @@ public class InventoryClick implements Listener {
             String clickedName = ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName());
 
             String kitSelector = ChatColor.stripColor(pvp.getInvManager().getKitSelector().getName());
-            String killStreaks = ChatColor.stripColorop(pvp.getInvManager().getKillStreaks().getName());
+            String killStreaks = ChatColor.stripColor(pvp.getInvManager().getKillStreaks().getName());
             String shopName = ColorUtil.colorStr(pvp.getFileUtil().getConfig().getString("shopName"));
             shopName = ChatColor.stripColor(shopName);
 

@@ -12,7 +12,7 @@ public class TNT extends IHardCodedAblity {
     @Override
     public void execute(Player p) {
         setPlayer(p);
-        getPlayer().sendMessage("STARTING TNT_DROP");
+        getPlayer().sendMessage("This is currently under development");
     }
 
 }

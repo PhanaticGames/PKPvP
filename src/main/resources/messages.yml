@@ -1,5 +1,13 @@
+# Kill streaks and rewards
 notEnoughKS: '&cYou do not have a high enough kill streak for this! :('
 givenKsReward: '&2Reward redeemed.'
+
+# Kits and shop
 givenKit: '&2Kit received.'
 notEnouchCoins: '&cYou cannot afford this.'
 kitBought: '&6Bought kit!'
+
+# Dogs
+pKilledByPDog: '&6%KILLED% was killed by %KILLER%''s dog'
+dogKilled: '&cYour dog was killed by %KILLER%'
+

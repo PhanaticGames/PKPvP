@@ -40,6 +40,9 @@ public class PKPvP extends JavaPlugin {
     @Getter
     private HardCodedAblitys ablitys;
 
+    @Getter
+    private EntityTracker entityTracker;
+
     @Override
     public void onEnable() {
         fileUtil = new FileUtil(this);
@@ -47,12 +50,13 @@ public class PKPvP extends JavaPlugin {
         ablitys.registerHardCodedAbility(new TNT());
         ablitys.registerHardCodedAbility(new DoppelGanger());
         ablitys.registerHardCodedAbility(new SupplyDrop());
-        ablitys.registerHardCodedAbility(new AttackDog());
+        ablitys.registerHardCodedAbility(new AttackDog(this));
         isManager = new ItemManager(this);
         locManager = new LocationManager(this);
         invManager = new InventoryManager(this);
         kitManager = new KitManager(this);
         tmpDatManager = new TempDataManager(this);
+        entityTracker = new EntityTracker();
         regListeners();
         regCommands();
         loadRunnables();
@@ -65,7 +69,7 @@ public class PKPvP extends JavaPlugin {
 
     private void regListeners() {
         PluginManager manager = getServer().getPluginManager();
-        manager.registerEvents(new EntityDeath(), this);
+        manager.registerEvents(new EntityDeath(this), this);
         manager.registerEvents(new PlayerDeath(this), this);
         manager.registerEvents(new PlayerJoin(this), this);
         manager.registerEvents(new PlayerLeave(), this);

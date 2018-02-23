@@ -12,6 +12,6 @@ public class DoppelGanger extends IHardCodedAblity {
     @Override
     public void execute(Player p) {
         setPlayer(p);
-        getPlayer().sendMessage("STARTING DROP_GAN");
+        getPlayer().sendMessage("This is currently in development");
     }
 }

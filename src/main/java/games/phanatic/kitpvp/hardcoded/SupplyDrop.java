@@ -12,6 +12,6 @@ public class SupplyDrop extends IHardCodedAblity {
     @Override
     public void execute(Player p) {
         setPlayer(p);
-        getPlayer().sendMessage("STARTING SPP_DRP");
+        getPlayer().sendMessage("This is currently in development");
     }
 }
