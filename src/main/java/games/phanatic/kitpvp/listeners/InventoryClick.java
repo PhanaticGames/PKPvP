@@ -26,13 +26,13 @@ public class InventoryClick implements Listener {
         String invName = ChatColor.stripColor(e.getInventory().getName());
         Player p = (Player) e.getWhoClicked();
 
-        if (e.getCurrentItem() != null && e.getCurrentItem().getType() != null) {
+        if (e.getInventory().getItem(e.getSlot()) != null) {
 
             Material clickedMat = e.getCurrentItem().getType();
             String clickedName = ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName());
 
             String kitSelector = ChatColor.stripColor(pvp.getInvManager().getKitSelector().getName());
-            String killStreaks = ChatColor.stripColor(pvp.getInvManager().getKillStreaks().getName());
+            String killStreaks = ChatColor.stripColorop(pvp.getInvManager().getKillStreaks().getName());
             String shopName = ColorUtil.colorStr(pvp.getFileUtil().getConfig().getString("shopName"));
             shopName = ChatColor.stripColor(shopName);
 
@@ -51,7 +51,6 @@ public class InventoryClick implements Listener {
     }
 
     private void executeShop(Material clickedMat, Player p) {
-        System.out.println("EXTERNAL METHOD BEING CALLED");
         for (IKit kit : pvp.getKitManager().getKits()) {
             if (clickedMat == kit.icon().toIS().getType()) {
                 p.closeInventory();
@@ -59,6 +58,7 @@ public class InventoryClick implements Listener {
                     pvp.getTmpDatManager().removeCoins(p, kit.price());
                     p.sendMessage(ColorUtil.colorStr(pvp.getFileUtil().getMessages().getString("kitBought")));
                     PSC.getPerms().playerAdd(null, p, kit.permission());
+                    pvp.getInvManager().reloadPlayerKits(p);
                 } else {
                     p.sendMessage(ColorUtil.colorStr(pvp.getFileUtil().getMessages().getString("notEnouchCoins")));
                 }

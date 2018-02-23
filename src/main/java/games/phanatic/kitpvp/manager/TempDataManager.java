@@ -1,6 +1,7 @@
 package games.phanatic.kitpvp.manager;
 
 import games.phanatic.kitpvp.PKPvP;
+import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -19,10 +20,12 @@ public class TempDataManager {
     }
 
     public void addCoins(Player p, int amount) {
-        if (!coins.containsKey(p)) {
+        if (coins.containsKey(p)) {
+            coins.replace(p, coins.get(p) + amount);
+        } else {
             loadPlayerCoins(p);
+            coins.replace(p, coins.get(p) + amount);
         }
-        coins.replace(p, coins.get(p) + amount);
     }
 
     public void removeCoins(Player p, int amount) {
@@ -32,10 +35,9 @@ public class TempDataManager {
         coins.replace(p, coins.get(p) - amount);
     }
 
-
     public void loadPlayerCoins(Player p) {
-        if (pvp.getFileUtil().getCoinConfig().contains(p.getUniqueId().toString())) {
-            coins.put(p, pvp.getFileUtil().getKitConfig().getInt(p.getUniqueId().toString()));
+        if(pvp.getFileUtil().getCoinConfig().isSet(p.getUniqueId().toString())) {
+            coins.put(p, pvp.getFileUtil().getCoinConfig().getInt(p.getUniqueId().toString()));
         } else {
             coins.put(p, 0);
         }
@@ -43,7 +45,9 @@ public class TempDataManager {
 
     public void saveCoins() {
         for (Player p : coins.keySet()) {
-            pvp.getFileUtil().getCoinConfig().set(p.getUniqueId().toString(), coins.get(p));
+            if(!(coins.get(p) == 0)) {
+                pvp.getFileUtil().getCoinConfig().set(p.getUniqueId().toString(), coins.get(p));
+            }
         }
         pvp.getFileUtil().saveCoins();
     }

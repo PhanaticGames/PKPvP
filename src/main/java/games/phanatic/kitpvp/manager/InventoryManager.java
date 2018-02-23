@@ -115,12 +115,27 @@ public class InventoryManager {
         if (playerInv.containsKey(p.getDisplayName())) {
             p.openInventory(playerInv.get(p.getDisplayName()));
         } else {
-            Inventory inv = kitSelector;
+            Inventory inv = Bukkit.createInventory(null, kitSelector.getSize(), kitSelector.getName());
+
+            for (int i = 0; i < kitSelector.getContents().length; i++) {
+                inv.setItem(i, kitSelector.getItem(i));
+            }
             for (IKit kit : pvp.getKitManager().getPlayerKits(p)) {
                 inv.addItem(kit.icon().toIS());
             }
             p.openInventory(inv);
             playerInv.put(p.getName(), inv);
+        }
+    }
+
+    public void reloadPlayerKits(Player p) {
+        if (playerInv.containsKey(p.getDisplayName())) {
+            //   Inventory inv = kitSelector;
+            //   for (IKit kit : pvp.getKitManager().getPlayerKits(p)) {
+            //      inv.addItem(kit.icon().toIS());
+            //  }
+            playerInv.remove(p.getName());
+            //  playerInv.put(p.getName(), inv);
         }
     }
 
