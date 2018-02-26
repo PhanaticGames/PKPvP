@@ -2,4 +2,4 @@ name: PhanaticKitPvP
 main: games.phanatic.kitpvp.PKPvP
 authors: [Matthew, Kuem]
 version: 1.0.0
-depends: [PSC]
+depends: [PSC, WorldGuard]

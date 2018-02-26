@@ -1,6 +1,7 @@
 package games.phanatic.kitpvp;
 
 import code.matthew.psc.utils.core.CommandManager;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import games.phanatic.kitpvp.cmds.Dev;
 import games.phanatic.kitpvp.cmds.Setspawn;
 import games.phanatic.kitpvp.cmds.Shop;
@@ -13,6 +14,8 @@ import games.phanatic.kitpvp.manager.*;
 import games.phanatic.kitpvp.run.CoinSave;
 import games.phanatic.kitpvp.util.FileUtil;
 import lombok.Getter;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -92,5 +95,17 @@ public class PKPvP extends JavaPlugin {
         long coinSave = getFileUtil().getConfig().getInt("datSync");
         coinSave = coinSave * 20;
         scheduler.scheduleAsyncRepeatingTask(this, new CoinSave(this), coinSave, coinSave);
+    }
+
+    public WorldGuardPlugin getWorldGuard() {
+        Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");
+
+        if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {
+            System.out.println("ERROR, WORLDGUARD WAS NOT FOUND. WE NEED THIS TO OPERATE!!!");
+            System.out.println("PkPvP is now disableing....");
+            Bukkit.getPluginManager().disablePlugin(this);
+            return null;
+        }
+        return (WorldGuardPlugin) plugin;
     }
 }

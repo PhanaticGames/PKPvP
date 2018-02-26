@@ -64,6 +64,10 @@
             <id>psc</id>
             <url>http://75.176.38.251/nexus/content/repositories/snapshots/</url>
         </repository>
+        <repository>
+            <id>sk89q-repo</id>
+            <url>http://maven.sk89q.com/repo/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -80,6 +84,12 @@
             <artifactId>craftbukkit</artifactId>
             <version>1.8.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sk89q.worldguard</groupId>
+            <artifactId>worldguard-legacy</artifactId>
+            <version>6.2</version>
         </dependency>
 
         <dependency>
