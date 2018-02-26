@@ -27,7 +27,7 @@ public class AttackDog extends IHardCodedAblity {
             wolf.setOwner(getPlayer());
             wolf.setMetadata("owner", new FixedMetadataValue(pvp, p.getName()));
             wolf.setCustomNameVisible(true);
-            wolf.setCustomName(ChatColor.RED + "Attack dog");
+            wolf.setCustomName(ChatColor.RED + getPlayer().getName() + ChatColor.RED + "'s hound");
             wolf.setCollarColor(DyeColor.CYAN);
             pvp.getEntityTracker().addEntityToPlayer(getPlayer(), wolf);
         }

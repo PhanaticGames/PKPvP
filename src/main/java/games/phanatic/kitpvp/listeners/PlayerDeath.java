@@ -43,6 +43,8 @@ public class PlayerDeath implements Listener {
                 killed.setFireTicks(0);
                 killed.getActivePotionEffects().clear();
                 pvp.getTmpDatManager().removeKS(killed);
+                pvp.getTmpDatManager().addKS(killer);
+                pvp.getTmpDatManager().addCoins(killer, pvp.getConfig().getInt("coinsPerKill"));
             }, 12L);
         } else {
             Player killer = e.getEntity().getKiller();
