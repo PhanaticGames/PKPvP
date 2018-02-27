@@ -19,6 +19,9 @@ public class Interact implements Listener {
 
     @EventHandler
     public void execute(PlayerInteractEvent e) {
+        if (e.getItem() == null) {
+            return;
+        }
         if (e.getAction() == Action.LEFT_CLICK_BLOCK || e.getAction() == Action.LEFT_CLICK_AIR) {
             if (e.getPlayer().getItemInHand().getType() == Material.COOKED_BEEF) {
                 e.getPlayer().setHealth(e.getPlayer().getHealth() + 3F);
