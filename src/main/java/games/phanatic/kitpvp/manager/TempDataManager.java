@@ -1,7 +1,7 @@
 package games.phanatic.kitpvp.manager;
 
 import games.phanatic.kitpvp.PKPvP;
-import org.apache.commons.lang.Validate;
+import games.phanatic.kitpvp.util.ScoreboardUtil;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -26,6 +26,10 @@ public class TempDataManager {
             loadPlayerCoins(p);
             coins.replace(p, coins.get(p) + amount);
         }
+        if (ScoreboardUtil.hasScore(p)) {
+            ScoreboardUtil.removeScore(p);
+        }
+        pvp.setPlayersSB(p);
     }
 
     public void removeCoins(Player p, int amount) {
@@ -33,6 +37,10 @@ public class TempDataManager {
             loadPlayerCoins(p);
         }
         coins.replace(p, coins.get(p) - amount);
+        if (ScoreboardUtil.hasScore(p)) {
+            ScoreboardUtil.removeScore(p);
+        }
+        pvp.setPlayersSB(p);
     }
 
     public void loadPlayerCoins(Player p) {
@@ -62,12 +70,20 @@ public class TempDataManager {
         } else {
             killStreaks.put(p, 1);
         }
+        if (ScoreboardUtil.hasScore(p)) {
+            ScoreboardUtil.removeScore(p);
+        }
+        pvp.setPlayersSB(p);
     }
 
     public void removeKS(Player p) {
         if (killStreaks.containsKey(p)) {
             killStreaks.remove(p);
         }
+        if (ScoreboardUtil.hasScore(p)) {
+            ScoreboardUtil.removeScore(p);
+        }
+        pvp.setPlayersSB(p);
     }
 
     public boolean canAffordKS(Player p, int price) {
@@ -82,6 +98,18 @@ public class TempDataManager {
         if (killStreaks.containsKey(p)) {
             killStreaks.replace(p, killStreaks.get(p) - amount);
         }
+        if (ScoreboardUtil.hasScore(p)) {
+            ScoreboardUtil.removeScore(p);
+        }
+        pvp.setPlayersSB(p);
+    }
+
+    public int getPlayerCoins(Player p) {
+        return coins.get(p);
+    }
+
+    public int getPlayerKS(Player p) {
+        return killStreaks.get(p);
     }
 
 }

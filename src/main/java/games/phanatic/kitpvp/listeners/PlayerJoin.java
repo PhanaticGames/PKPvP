@@ -21,5 +21,6 @@ public class PlayerJoin implements Listener {
         pvp.getIsManager().setPlayersInv(p);
         pvp.getTmpDatManager().loadPlayerCoins(p);
         pvp.getTmpDatManager().setupKS(p);
+        pvp.setPlayersSB(p);
     }
 }

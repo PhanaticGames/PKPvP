@@ -13,8 +13,10 @@ import games.phanatic.kitpvp.listeners.*;
 import games.phanatic.kitpvp.manager.*;
 import games.phanatic.kitpvp.run.CoinSave;
 import games.phanatic.kitpvp.util.FileUtil;
+import games.phanatic.kitpvp.util.ScoreboardUtil;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -108,5 +110,14 @@ public class PKPvP extends JavaPlugin {
             return null;
         }
         return (WorldGuardPlugin) plugin;
+    }
+
+    public void setPlayersSB(Player p) {
+        ScoreboardUtil helper = ScoreboardUtil.createScore(p);
+        helper.setTitle("PhanaticGames");
+        helper.setSlot(4, "&7&m--------------------------------");
+        helper.setSlot(3, "&aCoins&f: " + getTmpDatManager().getPlayerCoins(p));
+        helper.setSlot(2, "&aKill Streak: " + getTmpDatManager().getPlayerKS(p));
+        helper.setSlot(1, "&7&m--------------------------------");
     }
 }
