@@ -8,7 +8,7 @@
     <artifactId>PKPvP</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
-    <name>PhanaticSpigotCore</name>
+    <name>PKPvP</name>
 
     <description>KitPvP is fun, but PhanaticKitPvP, is even better.</description>
 
@@ -90,6 +90,7 @@
             <groupId>com.sk89q.worldguard</groupId>
             <artifactId>worldguard-legacy</artifactId>
             <version>6.2</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

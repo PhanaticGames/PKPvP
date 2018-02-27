@@ -18,9 +18,11 @@ public class KitManager {
     private PKPvP pvp;
 
     private List<IKit> kits;
+    private List<IKit> defaultKits;
 
     public KitManager(PKPvP pvp) {
         this.pvp = pvp;
+        defaultKits = new ArrayList<>();
         loadKits();
     }
 
@@ -39,7 +41,11 @@ public class KitManager {
             for (String s : pvp.getFileUtil().getKitConfig().getConfiguration().getConfigurationSection("kits." + name + ".items").getKeys(false)) {
                 items.add(loadItem(pvp.getFileUtil().getKitConfig().getConfiguration(), "kits." + name + ".items." + s));
             }
-            this.kits.add(KitFactory.genKit(icon, name, items, price, perm, isDefault));
+            IKit kit = KitFactory.genKit(icon, name, items, price, perm, isDefault);
+            this.kits.add(kit);
+            if (isDefault) {
+                defaultKits.add(kit);
+            }
         }
     }
 
@@ -66,7 +72,7 @@ public class KitManager {
         p.getInventory().setArmorContents(null);
         p.getActivePotionEffects().clear();
         p.setFireTicks(0);
-        for(IItem item : kit.items()) {
+        for (IItem item : kit.items()) {
             p.getInventory().setItem(item.getSlot(), item.toIS());
         }
         p.getInventory().setItem(8, pvp.getIsManager().getKillStreaks());
@@ -79,6 +85,10 @@ public class KitManager {
         List<String> lore = config.getStringList(path + ".lore");
         int slot = config.getInt(path + ".slot");
         return new IItem(name, mat, data, lore, slot);
+    }
+
+    public List<IKit> getDefaultKits() {
+        return defaultKits;
     }
 
 }
