@@ -1,5 +1,6 @@
 package games.phanatic.kitpvp.util;
 
+import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -55,6 +56,7 @@ public class ScoreboardUtil {
 
     public void setSlot(int slot, String text) {
         Team team = scoreboard.getTeam("SLOT_" + slot);
+
         String entry = genEntry(slot);
         if (!scoreboard.getEntries().contains(entry)) {
             sidebar.getScore(entry).setScore(slot);
@@ -63,6 +65,9 @@ public class ScoreboardUtil {
         text = ChatColor.translateAlternateColorCodes('&', text);
         String pre = getFirstSplit(text);
         String suf = getFirstSplit(ChatColor.getLastColors(pre) + getSecondSplit(text));
+
+        Validate.notNull(team, "team is null");
+
         team.setPrefix(pre);
         team.setSuffix(suf);
     }

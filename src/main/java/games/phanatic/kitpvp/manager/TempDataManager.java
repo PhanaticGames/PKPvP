@@ -26,10 +26,7 @@ public class TempDataManager {
             loadPlayerCoins(p);
             coins.replace(p, coins.get(p) + amount);
         }
-        if (ScoreboardUtil.hasScore(p)) {
-            ScoreboardUtil.removeScore(p);
-        }
-        pvp.setPlayersSB(p);
+        quickSBUpdate(p);
     }
 
     public void removeCoins(Player p, int amount) {
@@ -37,15 +34,13 @@ public class TempDataManager {
             loadPlayerCoins(p);
         }
         coins.replace(p, coins.get(p) - amount);
-        if (ScoreboardUtil.hasScore(p)) {
-            ScoreboardUtil.removeScore(p);
-        }
-        pvp.setPlayersSB(p);
+        quickSBUpdate(p);
     }
 
     public void loadPlayerCoins(Player p) {
-        if(pvp.getFileUtil().getCoinConfig().isSet(p.getUniqueId().toString())) {
-            coins.put(p, pvp.getFileUtil().getCoinConfig().getInt(p.getUniqueId().toString()));
+        int pCoins = pvp.getFileUtil().getCoinConfig().getInt(p.getUniqueId().toString());
+        if (pCoins != 0) {
+            coins.put(p, pCoins);
         } else {
             coins.put(p, 0);
         }
@@ -53,7 +48,7 @@ public class TempDataManager {
 
     public void saveCoins() {
         for (Player p : coins.keySet()) {
-            if(!(coins.get(p) == 0)) {
+            if (coins.get(p) != 0 && coins.get(p) >= 1) {
                 pvp.getFileUtil().getCoinConfig().set(p.getUniqueId().toString(), coins.get(p));
             }
         }
@@ -70,20 +65,14 @@ public class TempDataManager {
         } else {
             killStreaks.put(p, 1);
         }
-        if (ScoreboardUtil.hasScore(p)) {
-            ScoreboardUtil.removeScore(p);
-        }
-        pvp.setPlayersSB(p);
+        quickSBUpdate(p);
     }
 
     public void removeKS(Player p) {
         if (killStreaks.containsKey(p)) {
             killStreaks.remove(p);
         }
-        if (ScoreboardUtil.hasScore(p)) {
-            ScoreboardUtil.removeScore(p);
-        }
-        pvp.setPlayersSB(p);
+        quickSBUpdate(p);
     }
 
     public boolean canAffordKS(Player p, int price) {
@@ -98,10 +87,7 @@ public class TempDataManager {
         if (killStreaks.containsKey(p)) {
             killStreaks.replace(p, killStreaks.get(p) - amount);
         }
-        if (ScoreboardUtil.hasScore(p)) {
-            ScoreboardUtil.removeScore(p);
-        }
-        pvp.setPlayersSB(p);
+        quickSBUpdate(p);
     }
 
     public int getPlayerCoins(Player p) {
@@ -110,6 +96,14 @@ public class TempDataManager {
 
     public int getPlayerKS(Player p) {
         return killStreaks.get(p);
+    }
+
+    // Fix a little code..
+    private void quickSBUpdate(Player p) {
+        if (ScoreboardUtil.hasScore(p)) {
+            ScoreboardUtil.removeScore(p);
+        }
+        pvp.setPlayersSB(p);
     }
 
 }

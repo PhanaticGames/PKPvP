@@ -1,9 +1,44 @@
+##############################
+#        PKPVP CONFIG        #
+#      Made with love <3     #
+##############################
+
+# Coins per kill
 coinReward: 1
+
+# The effect given.
+# You may use any of these: SPEED, SLOW, FAST_DIGGING, SLOW_DIGGING, INCREASE_DAMAGE, HEAL, HARM,
+# JUMP, CONFUSION, REGENERATION,DAMAGE_RESISTANCE, FIRE_RESISTANCE, WATER_BREATHING, INVISIBILITY,
+# BLINDNESS, HUNGER, WEAKNESS, POISON, WITHER, HEALTH_BOOST, ABSORPTION, SATURATION
 killEffect: 'REGENERATION'
+
+# How long the effect last. In seconds
 killEffectTime: 4
+
+# How much of the effect you get, Convert roman numerals to latin characters
+# Ex: II = 2
 killEffectAmp: 1
+
+# How many seconds before a data sync should be run. 900 = 15 mins
 datSync: 900
-# The shop size is dynamic..
+
+# Name of the shop (PS: The shop's size is dynamic)
 shopName: '&6Kit shop!'
+
+# The price of a kit format
 priceFomat: '&6Price: %PRICE%'
+
+# How many coins you get per kill
 coinsPerKill: 2
+
+# Title of the score board
+sbtitle: '&6PhanaticGames'
+
+# Each line is a line of the sb. Max of 16 lines
+sbInfo:
+  - '&7&m--------------------------------'
+  - '&aCoins&f: %COINS%'
+  - '%BLANK%'
+  - '&aKill Streak&f: %KS%'
+  - '&7&m--------------------------------'
+  - '&6play.phanatic.games'

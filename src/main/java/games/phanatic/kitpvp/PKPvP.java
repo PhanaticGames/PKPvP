@@ -1,6 +1,7 @@
 package games.phanatic.kitpvp;
 
 import code.matthew.psc.utils.core.CommandManager;
+import code.matthew.psc.utils.strings.ColorUtil;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import games.phanatic.kitpvp.cmds.Dev;
 import games.phanatic.kitpvp.cmds.Setspawn;
@@ -21,6 +22,8 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
+
+import java.util.List;
 
 public class PKPvP extends JavaPlugin {
 
@@ -114,10 +117,24 @@ public class PKPvP extends JavaPlugin {
 
     public void setPlayersSB(Player p) {
         ScoreboardUtil helper = ScoreboardUtil.createScore(p);
-        helper.setTitle("PhanaticGames");
-        helper.setSlot(4, "&7&m--------------------------------");
-        helper.setSlot(3, "&aCoins&f: " + getTmpDatManager().getPlayerCoins(p));
-        helper.setSlot(2, "&aKill Streak: " + getTmpDatManager().getPlayerKS(p));
-        helper.setSlot(1, "&7&m--------------------------------");
+        helper.setTitle(ColorUtil.colorStr(getFileUtil().getConfig().getString("sbtitle")));
+
+        List<String> lines = ColorUtil.colorList(getFileUtil().getConfig().getStringList("sbInfo"));
+
+        int max = lines.size();
+
+        for (String s : lines) {
+            String finalExe;
+            if (s.contains("%BLANK%")) {
+                finalExe = " ";
+            } else {
+                s = s.replaceAll("%COINS%", String.valueOf(getTmpDatManager().getPlayerCoins(p)));
+                s = s.replaceAll("%KS%", String.valueOf(getTmpDatManager().getPlayerKS(p)));
+                finalExe = s;
+            }
+
+            helper.setSlot(max, finalExe);
+            max--;
+        }
     }
 }
